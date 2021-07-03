@@ -1,5 +1,9 @@
+require('dotenv').config()
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 const path = require('path')
 const express = require('express')
+const request = require('postman-request')
 const hbs = require('hbs')
 
 // Create express server
@@ -43,10 +47,33 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
-    res.send({
-        location: 'Philadelphia',
-        forecast: 'It is currently 14 degrees. It feels like 16 degrees!',
-        name: 'Sunny Baudelaire'
+    if (!req.query.address) {
+        return res.send({
+            error: 'You must provide an address.'
+        })
+    }
+
+    geocode(req.query.address, (error, { latitude, longitude, placeName }) => {
+        if (error) {
+            return res.send({
+                error
+            })
+        }
+
+        forecast(latitude, longitude, (error, forecastData) => {
+            if (error) {
+                return res.send({
+                    error
+                })
+            }
+
+            // This code only runs if everything went well (happy path)
+            res.send({
+                inputAddress: req.query.address,
+                geocodeMatchedLocation: placeName,
+                forecast: forecastData
+            })
+        })
     })
 })
 
