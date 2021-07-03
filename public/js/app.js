@@ -8,6 +8,8 @@ console.log('Client side javascript file is loaded!')
 
 const weatherForm = document.querySelector('form')
 const search = document.querySelector('input')
+const messageOne = document.querySelector('#message-1')
+const messageTwo = document.querySelector('#message-2')
 
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -16,13 +18,18 @@ weatherForm.addEventListener('submit', (e) => {
     const location = search.value
     url = 'http://localhost:3000/weather?address=' + encodeURIComponent(location)
 
+    // Setup loading message
+    messageOne.textContent = 'Loading...'
+    messageTwo.textContent = ''
+
     // Fetch data from URL
     fetch(url).then((response) => {    
-        response.json().then((data) => {
-            if (data.error) {
-                console.log(data.error)
+        response.json().then(({ error, geocodeMatchedLocation, forecast }) => {
+            if (error) {
+                return messageOne.textContent = error
             }
-            console.log(data)
+            messageOne.textContent = geocodeMatchedLocation
+            messageTwo.textContent = forecast
     })
 })
 })
