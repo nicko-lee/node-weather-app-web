@@ -16,7 +16,7 @@ weatherForm.addEventListener('submit', (e) => {
 
     // Build URL taking into account user input (encode for special chars including spaces)
     const location = search.value
-    url = 'http://localhost:3000/weather?address=' + encodeURIComponent(location)
+    url = '/weather?address=' + encodeURIComponent(location)
 
     // Setup loading message
     messageOne.textContent = 'Loading...'
