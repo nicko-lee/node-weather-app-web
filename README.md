@@ -1,7 +1,7 @@
 ## To run project
 1. Git clone project
 2. Run `npm install` to fetch NPM dependencies
-3. Run `npm run start` to run the app or `npm run dev` to run in dev environment with `nodemon`
+3. Run `npm run start` to run the app or `npm run dev` to run in dev environment with `nodemon`. Note that you will need to have installed `nodemon` on your machine as [I installed it globally](https://www.npmjs.com/package/nodemon). EDIT: This is no longer necessary as I have made this a `dev-dependency` using the NPM `--save-dev` flag, so you should be able to just run it with `npm run dev` without needing to have installed `nodemon` globally.
 
 ## Depends on
 - NPM packages: 
@@ -26,3 +26,10 @@
 - Setting up SSH keys to authenticate with TP services like GitHub and Heroku.
 - How to make several changes to code to prepare it to be deployed to Heroku + how to deploy on Heroku without a `Procfile`
 - How to use the NPM `package.json` script feature to create scripts for running in Prod and in Dev environment using `nodemon`
+- Best practice of avoiding global NPM modules where possible, to make it easier for other people to collaborate with you on a project.
+
+## Demo site
+https://sunny-weather-forecast-app.herokuapp.com/
+
+For this to work, remember it relies on 2 config vars setup on Heroku.
+https://devcenter.heroku.com/articles/config-vars 
