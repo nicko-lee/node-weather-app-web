@@ -35,7 +35,8 @@ app.get('', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About Me',
-        name: 'Sunny Baudelaire'
+        name: 'Sunny Baudelaire',
+        message: 'This site uses data from mapbox.com and weatherstack.com'
     })
 })
 
